@@ -5,12 +5,16 @@ const Section = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 25px;
+
   height: 223px;
   width: 100%;
   position: relative;
   top: 0;
   left: 0;
+  ${(props) =>
+    props.isDesktop
+      ? "height: 223px; border-radius: 25px;"
+      : "height:111px;border-radius: 10px;"}
 `;
 
 const SectionLayer = styled.div`
@@ -20,7 +24,8 @@ const SectionLayer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 25px;
+  ${(props) =>
+    props.isDesktop ? "border-radius: 25px;" : "border-radius: 10px;"}
 `;
 
 const SectionImg = styled.img`
@@ -29,23 +34,28 @@ const SectionImg = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 25px;
+  ${(props) =>
+    props.isDesktop ? "border-radius: 25px;" : "border-radius: 10px;"}
   object-fit: cover;
 `;
 
 const SectionText = styled.p`
-  font-size: 48px;
   color: ${colors.secondary};
   font-weight: 500;
   z-index: 10;
+  ${(props) =>
+    props.isDesktop
+      ? `font-size: 48px;`
+      : `font-size: 24px; padding-left: 16px;`};
 `;
 
 const Hero = (props) => {
+  console.log("test" + props.isDesktop);
   return (
-    <Section>
-      <SectionImg src={props.img} />
-      <SectionLayer />
-      <SectionText>{props.text}</SectionText>
+    <Section isDesktop={props.isDesktop}>
+      <SectionImg src={props.img} isDesktop={props.isDesktop} />
+      <SectionLayer isDesktop={props.isDesktop} />
+      <SectionText isDesktop={props.isDesktop}>{props.text}</SectionText>
     </Section>
   );
 };

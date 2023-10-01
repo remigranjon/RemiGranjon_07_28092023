@@ -6,19 +6,26 @@ import Error from "../../pages/Error/";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import GlobalStyle from "../GlobalStyle";
+import useWindowSize from "../../utils/functions/useWindowSize";
 
 const AppRouter = () => {
+  const windowSize = useWindowSize();
+  let isDesktop = windowSize.width > 930 ? true : false;
+
   return (
     <Router>
       <GlobalStyle />
-      <Header />
+      <Header isDesktop={isDesktop} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/ficheLogement/:idLogement" element={<FicheLogement />} />
-        <Route path="/APropos" element={<APropos />} />
-        <Route path="*" element={<Error />} />
+        <Route path="/" element={<Home isDesktop={isDesktop} />} />
+        <Route
+          path="/ficheLogement/:idLogement"
+          element={<FicheLogement isDesktop={isDesktop} />}
+        />
+        <Route path="/APropos" element={<APropos isDesktop={isDesktop} />} />
+        <Route path="*" element={<Error isDesktop={isDesktop} />} />
       </Routes>
-      <Footer />
+      <Footer isDesktop={isDesktop} />
     </Router>
   );
 };

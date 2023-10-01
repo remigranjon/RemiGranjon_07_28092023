@@ -6,7 +6,7 @@ import colors from "../../utils/style/colors";
 import Tag from "../../components/Tag";
 import Rating from "../../components/Rating";
 import Dropdown from "../../components/Dropdown";
-import useWindowSize from "../../utils/functions/useWindowSize";
+// import useWindowSize from "../../utils/functions/useWindowSize";
 
 const StyledBody = styled.div`
   display: flex;
@@ -84,55 +84,58 @@ const DropdownContainer = styled.div`
       : ` flex-direction: column; gap: 20px; margin-top: 16px`};
 `;
 
-const FicheLogement = () => {
+const FicheLogement = (props) => {
   const { idLogement } = useParams();
   const accomodation = findAccomodation(idLogement);
+  console.log(props.isDesktop);
 
-  const windowSize = useWindowSize();
-  let isDesktop = windowSize.width > 900 ? true : false;
+  // const windowSize = useWindowSize();
+  // let isDesktop = windowSize.width > 900 ? true : false;
 
   const hostName = accomodation.host.name.split(" ").join("\n");
 
   return (
-    <StyledBody isDesktop={isDesktop}>
+    <StyledBody isDesktop={props.isDesktop}>
       <Carrousel pictures={accomodation.pictures} />
-      <HeaderContainer isDesktop={isDesktop}>
+      <HeaderContainer isDesktop={props.isDesktop}>
         <FirstHeaderSection>
-          <HeaderTitle isDesktop={isDesktop}>{accomodation.title}</HeaderTitle>
-          <HeaderLocation isDesktop={isDesktop}>
+          <HeaderTitle isDesktop={props.isDesktop}>
+            {accomodation.title}
+          </HeaderTitle>
+          <HeaderLocation isDesktop={props.isDesktop}>
             {accomodation.location}
           </HeaderLocation>
           <TagsContainer>
             {accomodation.tags.map((tag, index) => (
-              <Tag isDesktop={isDesktop} text={tag} key={index} />
+              <Tag isDesktop={props.isDesktop} text={tag} key={index} />
             ))}
           </TagsContainer>
         </FirstHeaderSection>
-        <SecondHeaderSection isDesktop={isDesktop}>
+        <SecondHeaderSection isDesktop={props.isDesktop}>
           <HostContainer>
-            <HostName isDesktop={isDesktop}>{hostName}</HostName>
+            <HostName isDesktop={props.isDesktop}>{hostName}</HostName>
             <HostPicture
-              isDesktop={isDesktop}
+              isDesktop={props.isDesktop}
               src={accomodation.host.picture}
             />
           </HostContainer>
           <Rating
-            isDesktop={isDesktop}
+            isDesktop={props.isDesktop}
             rating={parseInt(accomodation.rating)}
           />
         </SecondHeaderSection>
       </HeaderContainer>
-      <DropdownContainer isDesktop={isDesktop}>
+      <DropdownContainer isDesktop={props.isDesktop}>
         <Dropdown
           title="Description"
           textElements={[accomodation.description]}
-          isDesktop={isDesktop}
+          isDesktop={props.isDesktop}
           key={1}
         />
         <Dropdown
           title="Equipements"
           textElements={accomodation.equipments}
-          isDesktop={isDesktop}
+          isDesktop={props.isDesktop}
           key={2}
         />
       </DropdownContainer>

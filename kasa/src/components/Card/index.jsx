@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
 import { Link } from "react-router-dom";
+import breakpoints from "../../utils/style/breakpoints";
 
 const CardContainer = styled(Link)`
     position: relative;
@@ -14,6 +15,10 @@ const CardContainer = styled(Link)`
     width: 340px;
     border-radius: 10px;
     text-decoration: none;
+    @media (max-width: ${breakpoints.mobile}) {
+      width: 100%;
+      height: 255px;
+    }
 `;
 
 const CardImage = styled.img`

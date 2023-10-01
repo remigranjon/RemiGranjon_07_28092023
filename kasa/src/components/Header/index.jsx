@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import colors from "../../utils/style/colors";
 import logo from "../../assets/images/logo.png";
-import useWindowSize from "../../utils/functions/useWindowSize";
+import breakpoints from "../../utils/style/breakpoints";
 
 const StyledLogo = styled.img`
+  height: 68px;
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 47px;
+  }
   ${(props) => (props.isDesktop ? `height: 68px;` : `height: 47px;`)};
 `;
 
@@ -36,21 +40,21 @@ const StyledLink = styled(Link)`
       : `font-size: 12px;text-transform: uppercase;`};
 `;
 
-const Header = () => {
+const Header = (props) => {
   let location = useLocation();
 
-  const windowSize = useWindowSize();
-  let isDesktop = windowSize.width > 930 ? true : false;
+  // const windowSize = useWindowSize();
+  // let isDesktop = windowSize.width > 930 ? true : false;
 
   return (
-    <HeaderContainer isDesktop={isDesktop}>
-      <StyledLogo src={logo} isDesktop={isDesktop} />
-      <StyledNav isDesktop={isDesktop}>
+    <HeaderContainer isDesktop={props.isDesktop}>
+      <StyledLogo src={logo} isDesktop={props.isDesktop} />
+      <StyledNav isDesktop={props.isDesktop}>
         <StyledLink
           to="/"
           $location={location}
           $activePath="/"
-          $isDesktop={isDesktop}
+          $isDesktop={props.isDesktop}
         >
           Accueil
         </StyledLink>
@@ -58,7 +62,7 @@ const Header = () => {
           to="/APropos"
           $location={location}
           $activePath="/APropos"
-          $isDesktop={isDesktop}
+          $isDesktop={props.isDesktop}
         >
           A Propos
         </StyledLink>

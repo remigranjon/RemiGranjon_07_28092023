@@ -24,6 +24,7 @@ const Header = styled.div`
 const Arrow = styled.img`
   ${(props) => (props.isDesktop ? `width: 24px;` : `width: 16px;`)};
   ${(props) => props.isOpen && `transform: rotate(180deg);`};
+  cursor: pointer;
 `;
 
 const HeaderText = styled.p`

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import colors from "../../utils/style/colors";
 import data from "../../assets/data/logements.json";
 import Card from "../Card";
+import breakpoints from "../../utils/style/breakpoints";
 
 const GalleryContainer = styled.div`
   display: grid;
@@ -14,11 +15,17 @@ const GalleryContainer = styled.div`
   background-color: ${colors.backgroundLight};
   align-items: center;
   justify-content: center;
+  @media (max-width: ${breakpoints.mobile}) {
+    background: none;
+    padding: 0;
+    row-gap: 21px;
+    grid-template-columns: 1fr;
+  }
 `;
 
-const Gallery = () => {
+const Gallery = (props) => {
   return (
-    <GalleryContainer>
+    <GalleryContainer isDesktop={props.isDesktop}>
       {data.map((logement, index) => (
         <Card
           key={index}
