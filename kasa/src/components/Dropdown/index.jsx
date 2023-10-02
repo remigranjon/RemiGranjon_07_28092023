@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { useState } from "react";
 import colors from "../../utils/style/colors";
 import arrow from "../../assets/images/arrow.svg";
+import breakpoints from "../../utils/style/breakpoints";
 
 const Container = styled.div`
   width: 100%;
+  cursor: pointer;
 `;
 
 const Header = styled.div`
@@ -19,26 +21,32 @@ const Header = styled.div`
   z-index: 10;
   position: relative;
   box-sizing: border-box;
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 6px 10px;
+    border-radius: 5px;
+  }
 `;
 
 const Arrow = styled.img`
-  ${(props) => (props.isDesktop ? `width: 24px;` : `width: 16px;`)};
   ${(props) => props.isOpen && `transform: rotate(180deg);`};
-  cursor: pointer;
+  width: 24px;
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 16px;
+  }
 `;
 
 const HeaderText = styled.p`
-  ${(props) => {
-    if (props.isDesktop && props.isLarge) {
-      return `font-size: 24px;`;
-    } else if (props.isDesktop) {
-      return `font-size: 18px;`;
-    } else {
-      return `font-size: 13px;`;
-    }
-  }};
   font-weight: 500;
   color: ${colors.secondary};
+  font-size: 18px;
+  ${(props) => {
+    if (props.isLarge) {
+      return `font-size: 24px;`;
+    }
+  }};
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 13px;
+  }
 `;
 
 const Content = styled.div`
@@ -50,6 +58,10 @@ const Content = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 20px;
+    ${(props) => !props.isOpen && `padding: 0;`};
+  }
 
   ${(props) => !props.isOpen && `height: 0px; padding: 0;`};
 `;
@@ -57,41 +69,29 @@ const Content = styled.div`
 const ContentLine = styled.p`
   color: ${colors.primary};
   font-weight: 400;
+  font-size: 18px;
   ${(props) => {
-    if (props.isDesktop && props.isLarge) {
+    if (props.isLarge) {
       return `font-size: 24px;`;
-    } else if (props.isDesktop) {
-      return `font-size: 18px;`;
-    } else {
-      return `font-size: 12px;`;
     }
   }};
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 12px;
+  }
 `;
 
 const Dropdown = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const clickArrow = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
-  // const isDesktop = props.isDesktop;
   return (
-    <Container>
+    <Container onClick={clickArrow}>
       <Header>
-        <HeaderText isDesktop={props.isDesktop} isLarge={props.isLarge}>
-          {props.title}
-        </HeaderText>
-        <Arrow
-          src={arrow}
-          isDesktop={props.isDesktop}
-          isOpen={isOpen}
-          onClick={clickArrow}
-        />
+        <HeaderText isLarge={props.isLarge}>{props.title}</HeaderText>
+        <Arrow src={arrow} isOpen={isOpen} />
       </Header>
       <Content isOpen={isOpen}>
         {props.textElements.map((element, index) => (
-          <ContentLine
-            isDesktop={props.isDesktop}
-            isLarge={props.isLarge}
-            key={index}
-          >
+          <ContentLine isLarge={props.isLarge} key={index}>
             {element}
           </ContentLine>
         ))}

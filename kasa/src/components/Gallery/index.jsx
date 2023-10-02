@@ -23,9 +23,9 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const Gallery = (props) => {
+const Gallery = () => {
   return (
-    <GalleryContainer isDesktop={props.isDesktop}>
+    <GalleryContainer>
       {data.map((logement, index) => (
         <Card
           key={index}

@@ -2,12 +2,18 @@ import Hero from "../../components/Hero";
 import styled from "styled-components";
 import heroImg from "../../assets/images/APropos.jpg";
 import Dropdown from "../../components/Dropdown";
+import breakpoints from "../../utils/style/breakpoints";
 
 const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
   margin: 63px 100px;
   gap: 43px;
+  @media (max-width: ${breakpoints.mobile}) {
+    margin: 20px;
+    gap: 0px;
+    min-height: 75vh;
+  }
 `;
 
 const DropDownContainer = styled.div`
@@ -15,6 +21,10 @@ const DropDownContainer = styled.div`
   flex-direction: column;
   margin: 33px 109px 46px 109px;
   gap: 33px;
+  @media (max-width: ${breakpoints.mobile}) {
+    gap: 20px;
+    margin: 20px 0;
+  }
 `;
 
 const APropos = () => {
@@ -45,8 +55,6 @@ const APropos = () => {
     },
   ];
 
-  let isDesktop = true;
-
   return (
     <StyledBody>
       <Hero img={heroImg} />
@@ -57,7 +65,6 @@ const APropos = () => {
             isLarge
             textElements={element.text}
             key={index}
-            isDesktop={isDesktop}
           ></Dropdown>
         ))}
       </DropDownContainer>

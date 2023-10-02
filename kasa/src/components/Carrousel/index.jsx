@@ -2,6 +2,7 @@ import styled from "styled-components";
 import colors from "../../utils/style/colors";
 import { useState } from "react";
 import leftArrow from "../../assets/images/leftArrow.svg";
+import breakpoints from "../../utils/style/breakpoints";
 
 const CarrouselContainer = styled.div`
   position: relative;
@@ -13,6 +14,10 @@ const CarrouselImage = styled.img`
   width: 100%;
   height: 415px;
   object-fit: cover;
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 255px;
+    border-radius: 10px;
+  }
 `;
 
 const LeftArrow = styled.img`
@@ -21,6 +26,11 @@ const LeftArrow = styled.img`
   top: 157px;
   left: 23px;
   cursor: pointer;
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 12px;
+    left: 6px;
+    top: 120px;
+  }
 `;
 
 const RightArrow = styled.img`
@@ -30,6 +40,11 @@ const RightArrow = styled.img`
   right: 23px;
   transform: rotate(180deg);
   cursor: pointer;
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 12px;
+    right: 6px;
+    top: 120px;
+  }
 `;
 
 const CarrouselCount = styled.p`
@@ -38,6 +53,9 @@ const CarrouselCount = styled.p`
   position: absolute;
   top: 358px;
   left: 50%;
+  @media (max-width: ${breakpoints.mobile}) {
+    display: none;
+  }
 `;
 
 const Carrousel = (props) => {

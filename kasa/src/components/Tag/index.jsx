@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
+import breakpoints from "../../utils/style/breakpoints";
 
 const TagContainer = styled.div`
   background-color: ${colors.primary};
@@ -10,21 +11,27 @@ const TagContainer = styled.div`
   align-items: center;
   border-radius: 10px;
   padding: 0 10px;
-  ${(props) =>
-    props.isDesktop
-      ? ` height: 25px; min-width: 95px `
-      : `min-width: 64px; height: 18px;`}
+  height: 25px;
+  min-width: 95px;
+  @media (max-width: ${breakpoints.mobile}) {
+    min-width: 64px;
+    height: 18px;
+    border-radius: 5px;
+  }
 `;
 
 const TagText = styled.p`
   font-weight: 500;
-  ${(props) => (props.isDesktop ? `font-size: 14px;` : `font-size: 10px;`)}
+  font-size: 14px;
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 10px;
+  }
 `;
 
 const Tag = (props) => {
   return (
-    <TagContainer isDesktop={props.isDesktop}>
-      <TagText isDesktop={props.isDesktop}>{props.text}</TagText>
+    <TagContainer>
+      <TagText>{props.text}</TagText>
     </TagContainer>
   );
 };

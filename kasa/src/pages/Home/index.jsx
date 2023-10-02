@@ -10,16 +10,16 @@ const StyledBody = styled.div`
   gap: 43px;
   margin: 63px 100px;
   @media (max-width: ${breakpoints.mobile}) {
-    margin: 63px 20px;
+    margin: 20px;
     gap: 25px;
   }
 `;
 
-function Home(props) {
+function Home() {
   const heroText = "Chez vous, partout et ailleurs";
   return (
-    <StyledBody isDesktop={props.isDesktop}>
-      <Hero img={sectionImg} text={heroText} isDesktop={props.isDesktop} />
+    <StyledBody>
+      <Hero img={sectionImg} text={heroText} />
       <Gallery />
     </StyledBody>
   );
