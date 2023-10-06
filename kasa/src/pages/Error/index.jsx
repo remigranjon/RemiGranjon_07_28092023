@@ -27,6 +27,8 @@ const StyledH2 = styled.h2`
   @media (max-width: ${breakpoints.mobile}) {
     font-size: 18px;
     margin: 10px auto 0 auto;
+    text-align: center;
+    padding: 0 15px;
   }
 `;
 
