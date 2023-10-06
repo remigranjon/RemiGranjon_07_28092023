@@ -1,5 +1,5 @@
 import Carrousel from "../../components/Carrousel";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import findAccomodation from "../../utils/functions/findAccomodation";
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
@@ -114,43 +114,44 @@ const DropdownContainer = styled.div`
 const FicheLogement = () => {
   const { idLogement } = useParams();
   const accomodation = findAccomodation(idLogement);
-  const hostName = accomodation.host.name.split(" ").join("\n");
-
-  return (
-    <StyledBody>
-      <Carrousel pictures={accomodation.pictures} />
-      <HeaderContainer>
-        <FirstHeaderSection>
-          <HeaderTitle>{accomodation.title}</HeaderTitle>
-          <HeaderLocation>{accomodation.location}</HeaderLocation>
-          <TagsContainer>
-            {accomodation.tags.map((tag, index) => (
-              <Tag text={tag} key={index} />
-            ))}
-          </TagsContainer>
-        </FirstHeaderSection>
-        <SecondHeaderSection>
-          <HostContainer>
-            <HostName>{hostName}</HostName>
-            <HostPicture src={accomodation.host.picture} />
-          </HostContainer>
-          <Rating rating={parseInt(accomodation.rating)} />
-        </SecondHeaderSection>
-      </HeaderContainer>
-      <DropdownContainer>
-        <Dropdown
-          title="Description"
-          textElements={[accomodation.description]}
-          key={1}
-        />
-        <Dropdown
-          title="Equipements"
-          textElements={accomodation.equipments}
-          key={2}
-        />
-      </DropdownContainer>
-    </StyledBody>
-  );
+  if (accomodation) {
+    const hostName = accomodation.host.name.split(" ").join("\n");
+    return (
+      <StyledBody>
+        <Carrousel pictures={accomodation.pictures} />
+        <HeaderContainer>
+          <FirstHeaderSection>
+            <HeaderTitle>{accomodation.title}</HeaderTitle>
+            <HeaderLocation>{accomodation.location}</HeaderLocation>
+            <TagsContainer>
+              {accomodation.tags.map((tag, index) => (
+                <Tag text={tag} key={index} />
+              ))}
+            </TagsContainer>
+          </FirstHeaderSection>
+          <SecondHeaderSection>
+            <HostContainer>
+              <HostName>{hostName}</HostName>
+              <HostPicture src={accomodation.host.picture} />
+            </HostContainer>
+            <Rating rating={parseInt(accomodation.rating)} />
+          </SecondHeaderSection>
+        </HeaderContainer>
+        <DropdownContainer>
+          <Dropdown
+            title="Description"
+            textElements={[accomodation.description]}
+            key={1}
+          />
+          <Dropdown
+            title="Equipements"
+            textElements={accomodation.equipments}
+            key={2}
+          />
+        </DropdownContainer>
+      </StyledBody>
+    );
+  } else return <Navigate to={"/404"} />;
 };
 
 export default FicheLogement;
